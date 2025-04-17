@@ -1,4 +1,5 @@
 data:
+  supportsFileTransfer: true  # Indicates if the connector supports file transfer.
   allowedHosts:
     hosts:
       - "api.ragie.ai"  # Updated to the actual API hostname of the source.

@@ -16,7 +16,7 @@ packages = [ { include = "destination_ragie" }, {include = "main.py" } ]
 
 [tool.poetry.dependencies]
 python = "^3.9,<3.12"
-airbyte-cdk = { version = "< 3"}
+airbyte-cdk = { version = "> 5"}
 
 
 [tool.poetry.scripts]

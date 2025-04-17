@@ -146,4 +146,3 @@ class DestinationRagie(Destination):
             ],
             connectionSpecification=RagieConfig.model_json_schema(),
         )
-

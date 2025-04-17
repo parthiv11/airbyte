@@ -1,5 +1,5 @@
 
-FROM airbyte/python-connector-base:1.1.0
+FROM airbyte/python-connector-base:4.0.0
 
 COPY . ./airbyte/integration_code
 RUN pip install ./airbyte/integration_code
