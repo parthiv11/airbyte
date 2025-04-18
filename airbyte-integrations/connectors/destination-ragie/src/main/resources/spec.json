@@ -1,0 +1,90 @@
+{
+    "documentationUrl": "https://docs.ragie.ai/integrations/airbyte",
+    "connectionSpecification": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Ragie Destination Spec",
+      "type": "object",
+      "required": [
+        "api_key"
+      ],
+      "properties": {
+        "api_key": {
+          "title": "API Key",
+          "description": "API Key for Ragie.ai.",
+          "type": "string",
+          "airbyte_secret": true,
+          "order": 0
+        },
+        "metadata_fields": {
+          "title": "Metadata Fields",
+          "description": "(Optional) List of fields from the record to store as metadata (applied to both text and file documents). If empty, only internal Airbyte metadata is added. Use dot notation (e.g., 'user.email', 'file.modified').",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "order": 2,
+          "examples": ["user.id", "user.email", "file.last_modified", "source_system"]
+        },
+        "partition": {
+          "title": "Partition Name",
+          "description": "(Optional) Name of the partition (index/dataset) to write data into. Must be lowercase alphanumeric with '-' or '_'. If empty, uses account default.",
+          "type": "string",
+          "pattern": "^[a-z0-9_\\-]*$",
+          "default": null,
+          "order": 3
+        },
+        "processing_mode": {
+          "title": "Mode",
+          "description": "Processing mode for ingestion ('fast' or 'hi_res'). 'hi_res' enables OCR and more detailed processing for files.",
+          "type": "string",
+          "enum": ["fast", "hi_res"],
+          "default": "fast",
+          "order": 4
+        },
+        "document_name_field": {
+          "title": "Document Name Field",
+          "description": "(Optional) Field from the record to use as the document/file name in Ragie (e.g., 'file.file_name', 'message_subject'). If empty or field not found, a name is auto-generated. Use dot notation.",
+          "type": "string",
+          "default": null,
+          "order": 5
+        },
+        "metadata_static": {
+          "title": "Static Metadata (JSON)",
+          "description": "(Optional) Static key-value pairs (as a JSON object) to add to every document's metadata.",
+          "type": "object",
+          "default": {},
+          "order": 6,
+          "examples": [
+            {
+              "source": "airbyte",
+              "environment": "production"
+            }
+          ]
+        },
+        "external_id_field": {
+          "title": "External ID Field",
+          "description": "(Optional) Field from the record to use as the unique 'external_id' for Ragie documents (e.g., 'message_id', 'file.file_key'). Useful for idempotent updates if supported by source. Use dot notation.",
+          "type": "string",
+          "default": null,
+          "order": 7
+        },
+        "api_url": {
+          "title": "API URL",
+          "description": "URL for the Ragie API. Defaults to https://api.ragie.ai",
+          "type": "string",
+          "default": "https://api.ragie.ai",
+          "order": 8
+        },
+        "log_interval": {
+          "title": "Log Progress Interval (Records)",
+          "description": "Log progress information after processing this many records. Set to 0 to disable progress logging.",
+          "type": "integer",
+          "default": 500,
+          "minimum": 0,
+          "order": 9
+        }
+      },
+      "additionalProperties": false
+    }
+  }
